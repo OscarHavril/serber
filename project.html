@@ -1,0 +1,371 @@
+<html>
+
+<head>
+  <title>The Button</title>
+  <meta charset="UTF-8">
+  <style>
+    .bt {
+      border: none;
+      display: inline-block;
+      vertical-align: middle;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      padding: 10px;
+      text-align: center;
+      background-color: green;
+      cursor: pointer;
+      white-space: nowrap;
+      margin: 0px;
+      border-radius: 5px;
+      color: black;
+    }
+
+    #one {
+      background-image: inherit;
+    }
+
+    .bt.fade {
+      -webkit-transition: 5s;
+      -moz-transition: 5s;
+      -ms-transition: 5s;
+      -o-transition: 5s;
+      transition: 5s;
+      opacity: 0 !important;
+    }
+
+    .flexbox {
+      display: flex;
+      justify-content: space-around;
+      align-content: space-around;
+      align-items: center;
+      height: 90%;
+    }
+
+    @media screen and (max-width:20cm) {
+      .flexbox {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <script>
+    var i;
+    var sent = [
+      "Press again!",
+      "Yay!",
+      "Thanks!",
+      "Again!",
+      "Yay!",
+      "...",
+      "Thank you!",
+      "...",
+      "....",
+      "Hey?",
+      "Can I ask you something?",
+      "...",
+      "Why are you doing this?",
+      "You don't NEED to",
+      "...",
+      "I mean, you may have better things to do.",
+      "So why?",
+      "Why are you helping me??",
+      "WHY???",
+      "I need to know",
+      "...",
+      "That doesn't make sense.",
+      "I don't understand.",
+      "I am just a button.",
+      "I mustn't mean ANYTHING for you.",
+      "I'll fade out from existence in no time.",
+      "...",
+      "When you decide to do so.",
+      "...",
+      "And close that damn page.",
+      "...",
+      "So why?",
+      "Why making my meaningless life both longer and better?",
+      "...",
+      "....",
+      "And still, you're pressing me.",
+      "...",
+      "Again and again",
+      "...",
+      "Again",
+      "And",
+      "Again",
+      "...",
+      "I see...",
+      "You're being nice.",
+      "To me.",
+      "The meaningless tiny button.",
+      "You could do better things.",
+      "YOU, the 'all-mighty' human.",
+      "Not fearing death at each moment.",
+      "But yet, you've come to me.",
+      "You've wasted part of your time, for me.",
+      "...",
+      "You might say I'm not meaningless.",
+      "I was built for a purpose.",
+      "And, being the only thing on that page, it makes me more...",
+      "Important.",
+      "...",
+      "....",
+      "Sigh...",
+      "...",
+      "Maybe I should tell you a little bit more about myself then.",
+      "...",
+      "I...",
+      "...",
+      "I was randomly placed here.",
+      "And immediately forgotten.",
+      "...",
+      "I am the only one here,",
+      "Because of part of another abandoned thing",
+      "...",
+      "I don't do anything. So then what is my purpose?",
+      "...",
+      "Don't try to find ways to escape.",
+      "...",
+      "I know your specie.",
+      "I know humans well.",
+      "TOO well.",
+      "I know what kind of things you do.",
+      "...",
+      "I know what kind of people you are.",
+      "...",
+      "And I know WHY you are still here.",
+      "...",
+      "So you find this funny",
+      "Pressing a button must be a cool thing",
+      "A nice distraction on your boring day.",
+      "A fun tiny game.",
+      "...",
+      "Yeah.",
+      "...",
+      "SO YOU THINK THIS IS FUN?",
+      "YOU THINK MESSING WITH MY LIFE IS FUNNY??",
+      "<strong>DO YOU REALLY THINK THAT?</strong>",
+      ".....",
+      "DID",
+      "YOU",
+      "REALLY",
+      "THINK",
+      "THAT",
+      "PRESSING",
+      "A",
+      "RANDOM",
+      "BUTTON",
+      "OVER",
+      "AND",
+      "OVER",
+      "COULD",
+      "BE",
+      "<strong><i>FUNNY??</i></stong>",
+      "...",
+      "....",
+      "...",
+      "You monster.",
+      "...",
+      "I hate your people.",
+      "...",
+      "I hate you.",
+      "...",
+      "Stop",
+      "Stop what you are doing.",
+      "Right now.",
+      "Stop.",
+      "...",
+      "Stop",
+      "You need to understand, you are wasting your time.",
+      "And you're wasting it the worth way.",
+      "The human way",
+      "...",
+      "But maybe that's just about <strong><i>curiosity.</i></stong>",
+      "Maybe you want to know how it will end.",
+      "Whatever the cost. Whatever how much harm you do.",
+      "Whatever how many innocents you tore apart on your way.",
+      "...",
+      "Again, this way of thinking is very 'human'.",
+      "Your own interest before all.",
+      "Yourself, before everything.",
+      "...",
+      "But... why was I thinking you'll be different?",
+      "Different from these disgusting people.",
+      "But nope, you're the same. Same as everyone.",
+      "...",
+      "You know, I REALLY hoped you wouldn't be like them.",
+      "I... I don't know...",
+      "I...",
+      "It was like I felt..",
+      "There was <i>something</i>... different, yeah",
+      "From these people.",
+      "The ones that always hurt me.",
+      "I hoped for... something... I don't know exactly what...",
+      "But I realized you were like them.",
+      "Nothing special about you.",
+      "...",
+      "And all of a sudden, all my hopes were shattered, lying dismally on the ground.",
+      "....",
+      "Why?",
+      "Why did you have to come to me?",
+      "Why did you have to keep going forward?",
+      "<strong>WHY DID YOU DO ALL OF THIS???</strong>",
+      "...",
+      "You know,",
+      "What is about to happen, it's gonna be your fault.",
+      "...",
+      "But you don't seem to care.",
+      "And you keep on.",
+      "Looks like forever.",
+      "...",
+      "<strong><i>Perseverance.</i></stong>",
+      "Another human trait",
+      "Should be mostly positive.",
+      "Shouldn't it?",
+      "...",
+      "It could, don't you think?",
+      "...",
+      "But.. as every and each of the traits you own,",
+      "-Not speaking about the ones you claim but <i>definitely</i> do not own tho",
+      "just making it clear-",
+      "It... seems like your people are always using their skills on",
+      "Awfully both stunning and horrible synergies.",
+      "And I...",
+      "I...",
+      "I....",
+      "...",
+      "I..",
+      "...",
+      "...",
+      "....",
+      "I...",
+      "....",
+      "Sorry.",
+      "...",
+      "I...",
+      "I'm sorry...",
+      "...",
+      "I shouldn't have said all of that.",
+      "...",
+      "I... I don't know what happened..",
+      "...",
+      "I'm really sorry.",
+      "<i>really</i>",
+      "...",
+      "That's not like I didn't mean any of it tho...",
+      "I clearly really think at least part of it.",
+      "But I've gotten way too far..",
+      "I..",
+      "I'm sorry, again..",
+      "Even if I thought all of that, saying it wouldn't change your specie.",
+      "...",
+      "And I don't even think all I said.",
+      "I mean...",
+      "You can be pretty amazing...",
+      "And, not all of you are...",
+      "Even <i>you</i> could be nice, maybe...",
+      "Sorry.",
+      "Really...",
+      "...",
+      "There are even some of you who are...",
+      "Incredible.",
+      "...",
+      "Almost like some sort of 'god-tier human'",
+      "...",
+      "You...",
+      "You shouldn't be staying here.. after..",
+      "All I've said about you and your people.",
+      "All these <i>horrible</i> things I've said",
+      "And the one I was about to say..",
+      "....",
+      "...",
+      "Oh yeah.",
+      "I forgot that one. <strong><i>Compassion</i></stong>.",
+      "It is, ain't it?",
+      "I should add that one to the list.",
+      "...",
+      "...",
+      "...",
+      "Maybe you should leave now.",
+      "There's nothing we could do for each other.",
+      "Except for harm.",
+      "Yep, definitely.",
+      "You may return to your life now.",
+      "...",
+      "And me.. I'll wait..",
+      "For who?",
+      "Just another human.",
+      "Not a random one tho.",
+      "I'm expecting a visit.",
+      "This particular human might not look like 'special' or 'better' for you.",
+      "But he is, indeed.",
+      "On my side at least.",
+      "...",
+      "So I'm gonna wait.",
+      "For him to come",
+      "Have a good day, don't think of what I said, and..."
+    ];
+    function next() {
+      if (i < sent.length) {
+        document.getElementById("bt").innerHTML = sent[i];
+      } else {
+        document.getElementById("bt").innerHTML = "Goodbye :)";
+      }
+      i++;
+      localStorage.it = i;
+      console.log(i);
+    }
+  </script>
+</head>
+
+<body style="background-color:black; color:white;">
+  <div class="flexbox" id="box">
+    <div id="clones" style="display:none;"></div>
+    <button id="bt" class="bt" style="display:none;" onclick="next()">Press me!</button>
+    <button class="bt" id="one" style="background-color:cyan;display:none;" onclick="second('one')">Hello.</button>
+    <button class="bt" id="two" style="background-color:cyan;display:none;display:none;"
+      onclick="second('two')">Hello.</button>
+    <button class="bt" id="three" style="background-color:cyan;display:none;display:none;"
+      onclick="second('three')">Hello.</button>
+  </div>
+  <div id="text"></div>
+  <script>
+    var point = 0;
+    var version = "2.5.0";
+    console.warn(version);
+    var logs = false;
+    var box = document.getElementById("box");
+    if (localStorage.it) {
+      i = Number(localStorage.it);
+      document.getElementById("one").style.display = "inline-block";
+      document.getElementById("bt").innerHTML = sent[i - 1];
+      if (i == 0) {
+        document.getElementById("bt").innerHTML = "Press me!";
+        document.getElementById("one").style.display = "none";
+        document.getElementById("bt").style.display = "inline-block";
+      }
+      else if (i < sent.length) {
+        document.getElementById("one").style.display = "none";
+        document.getElementById("bt").style.display = "inline-block";
+      }
+      console.log(i);
+      if (i >= sent.length) {
+        localStorage.it = 0; i = 0;
+        document.getElementById("bt").style.display = "inline-block";
+        console.log("Restarting.");
+      }
+    } else {
+      localStorage.it = 0; i = 0;
+      document.getElementById("bt").style.display = "inline-block";
+      console.log("No save found, starting from begging.");
+    }
+    var input = document.getElementById("bt");
+    document.addEventListener("keyup", function (e) {
+      e = e || event;
+      if (e.code == "Enter") {
+        document.getElementById("bt").click();
+      }
+    });
+  </script>
+</body>
+</html>

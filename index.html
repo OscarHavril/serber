@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Where you come and go">
+    <meta name="keywords" content="Delta,main,hub">
+    <meta name="author" content="Delta">
+    <style>
+        #secret {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border: 3px solid rgb(70, 70, 70);
+            background-color: grey;
+            color: white
+        }
+    </style>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 120%;
+        }
+
+        .flexZone {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            align-content: space-around;
+            word-wrap: normal;
+            width: 100%;
+            height: 100%;
+        }
+
+        .flexZone>div {
+            padding: 15px;
+            margin: 8px;
+            float: left;
+            word-wrap: break-word;
+            width: 24%;
+        }
+
+        .desc {
+            position: relative;
+            left: 13px;
+            font-size: 80%;
+        }
+
+        /* Use a media query to add a break point at 800px: */
+        @media screen and (max-width:23cm) {
+
+            .games,
+            .cartoons,
+            .books,
+            .flexZone>div {
+                width: 100%;
+                max-width: 350px;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    </style>
+    <title>Delta's hub</title>
+</head>
+
+<body style="background-color:black;">
+    <p id="top" style="text-align:center; color:black;">O</p>
+    <script src="statements.js"></script>
+    <section id="flexy" class="flexZone" style="background-color:black; color:white;">
+        <div style="background-color:peru;">
+            <pre>
+<h1><b>My Games:</b></h1>
+<a href="https://Delta.github.io/the-journey/" title="Go and break the game" target="_blank"><b>Labyrinth</b> (2019)</a> 
+</pre>
+            <p class="desc">
+                Temporary name, not working yet.
+            </p>
+            <pre>
+<a href="http://orteil.dashnet.org/igm/?g=7n7Ac4Wv" title="Don't. Please" target="_blank"><b>MineClicker</b> (2018)</a> 
+</pre>
+            <p class="desc">
+                Abandoned, dirty.
+            </p>
+            <pre>
+<a href="javascript:void(0)" title="Well, Not yet." target="_blank"><b>Geneticorp</b> (2017-2019)</a> 
+</pre>
+            <p class="desc">
+                Unfinished Starcraft-like cellular management game. You can also reach the <a
+                    href="https://discord.gg/ZfcW7ff" style="text-decoration:none;color:black;"
+                    title="Join the Discord community!" target="_blank"><b>Discord</b></a>.
+            </p>
+        </div>
+        <div style="background-color:grey;">
+            <pre>
+<h1><b>Drawings:</b></h1>
+<a href="https://crazyband.home.blog/" title="Go to our magnificent website" target="_blank"><b>CrazyBand</b> (2018-2019)</a> 
+</pre>
+            <p class="desc">
+                Some cartoons lies here.
+            </p>
+            <pre>
+<a href="https://www.instagram.com/Delta/" title="Go check" target="_blank"><b>Instagram</b> (2019)</a> 
+</pre>
+            <p class="desc">
+                Some cartoons, mostly stolen from CrazyBand, and exclusive drawings.
+            </p>
+            <pre>
+<a href="https://www.pixilart.com/Delta" title="This is dusty" target="_blank"><b>Pixilart</b> (2018)</a> 
+</pre>
+            <p class="desc">
+                Unfinished drawings, almost-abandoned, not very interesting.
+            </p>
+        </div>
+
+        <div style="background-color:limegreen;">
+            <pre>
+<h1><b>Bookshelf:</b></h1>
+<a href="https://www.wattpad.com/user/Delta" title="Wattpad, weird french books." target="_blank"><b>Wattpad</b> (2017-2019)</a> 
+</pre>
+            <p class="desc">
+                "Regularily updated". Hopefully.
+                Books that could deserve reading:
+            </p>
+
+        </div>
+    </section>
+    <script>
+        var Category = function () {
+            this.name = "Unnamed Category";
+            //this.description = "A Category";
+            this.color = "white";
+            this.add = function (Item) {
+                this.items.push(Item);
+            }
+            this.items = [];
+            this.display = function () {
+                var result = '<div style="background-color:' + this.color + ';"><pre><h1><b>' + this.name + ':</b></h1></br>';
+                for (let i = 0; i < this.items.length; i++) {
+                    result += '<a href="' + this.items[i].link + '" title="' + this.items[i].alt + '" target="_blank"><b>' + this.items[i].name + ':</b> (' + this.items[i].beginDate + (this.items[i].endDate ? "-" + this.items[i].endDate : "") + ')</a></pre><p class="desc">' + this.items[i].description + '</p>'
+                    if (i < this.items.length - 1) result += '<pre>';
+                }
+                result += '</div>';
+                document.getElementById('flexy').innerHTML += result;
+            };
+        };
+        var Item = function () {
+            this.name = "Unnamed Item";
+            this.description = "An Item";
+            this.link = "javascript:void(0)";
+            this.alt = "A Link";
+            this.beginDate = "1970";
+            this.endDate = "";
+        };
+        
+        var games = new Category();
+        games.name = 'Gaems';
+        games.color = 'peru';
+        var farlands = new Item();
+        farlands.name = 'Farlands';
+        farlands.description = 'A game about discovery. A game about understanding. A game about people an people. An empty game for now tho.';
+        farlands.alt = 'Idk';
+        farlands.beginDate = "2017";
+        games.add(farlands);
+        var theButton = new Item();
+        theButton.name = 'The Button';
+        theButton.description = 'And what about all these unfinished projects? All this code, all these lines, what do they have to say about their loneliness? And now you will listen to them.';
+        theButton.alt = 'Idk';
+        theButton.beginDate = "2018";
+        games.add(theButton);
+
+        games.display();
+    </script>
+</body>
+
+</html>

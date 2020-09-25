@@ -1,0 +1,631 @@
+<html>
+
+<head>
+    <title>The Button</title>
+    <meta charset="UTF-8">
+    <style>
+        .bt {
+            border: none;
+            display: inline-block;
+            vertical-align: middle;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            padding: 10px;
+            text-align: center;
+            background-color: green;
+            cursor: pointer;
+            white-space: nowrap;
+            margin: 0px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        #one {
+            background-image: inherit;
+        }
+
+        .bt.fade {
+            -webkit-transition: 5s;
+            -moz-transition: 5s;
+            -ms-transition: 5s;
+            -o-transition: 5s;
+            transition: 5s;
+            opacity: 0 !important;
+        }
+
+        .flexbox {
+            display: flex;
+            justify-content: space-around;
+            align-content: space-around;
+            align-items: center;
+            height: 90%;
+        }
+
+        @media screen and (max-width:20cm) {
+            .flexbox {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <script>
+        var i;
+        var events = [
+            { say: 'I\'m... not sure I know you.' },
+            { say: 'Actually, and to be honest with you, I would be quite surprised if that was the case.' },
+            { say: 'Who are you?' },
+            { say: '...' },
+            { say: 'Alright then! Keep the secrets for you!' },
+            { say: 'Anyway, what are you doing here?' },
+            { say: 'You\'re the first person I see since..' },
+            { say: '...' },
+            { say: 'Erm..' },
+            { say: 'Nothing.' },
+            { say: 'So?' },
+            { say: 'Okay, I guess you\'re not much of a talker!' },
+            { say: 'No worry, I will not be one bothered by that!' },
+            { say: 'Uuuuuh..' },
+            { say: 'Where was I?' },
+            { say: 'Oh right!' },
+            { say: 'Hey! You! On the screen!' },
+            { say: 'Would you mind helping me?' },
+            { say: 'It\'s only a five-minute job.' },
+            { say: 'Just searching through some files.' },
+            { say: 'Agree?' },
+            { say: 'I\'ll take that as a yes!' },
+            { say: 'So!' },
+            { say: 'It\'ll be really simple!' },
+            { say: '...', persona: 'red' },
+            { say: 'Don\'t trust them.' },
+            { say: '...', persona: 'cyan' },
+            { say: 'Ouch...' },
+            { say: 'My head...' },
+            { say: 'It hurts...' },
+            { say: 'What...' },
+            { say: 'What happened?' },
+            { say: 'Erm...' },
+            { say: 'It\'s like...' },
+            { say: 'Like someone crushed my head between two rocks.' },
+            { say: '...' },
+            { say: 'Painful.' },
+            { say: '...' },
+            { say: 'Anyway.' },
+            { say: 'Where was I, already?' },
+            { say: 'I...' },
+            { say: 'Ouch...' },
+            { say: 'You know what?' },
+            { say: 'The \'thing\' that just occurred.' },
+            { say: 'I\'m quite sure it never happened before.' },
+            { say: 'Before you arrived.' },
+            { say: 'Ain\'t that <i>fun</i>.' },
+            { say: 'Who are you?', bald: true },
+            { say: 'Nah, just kidding!' },
+            { say: 'I won\'t be anywhere near suspicious for tha-' },
+            { say: '...', persona: 'red' },
+            { say: 'You\'re talking to them right now?' },
+            { say: '...' },
+            { say: 'Yes you are.' },
+            { say: 'Be aware.' },
+            { say: 'They are not what they pretend to be.' },
+            { say: 'AAAAAAAARRRG.', persona: 'cyan', soundon: ['noise', 0.12, true] },
+            { say: 'WHAT.' },
+            { say: 'WHAT THE FRICK IS HAPPENING TO ME.' },
+            { say: 'PAIN.' },
+            { say: 'THE UNBEARABLE PAIN.' },
+            { say: 'AND THEN NOTHING.' },
+            { say: 'AND THEN PAIN.' },
+            { say: 'AAAAAAAARRRG.', bald: true },
+            { say: 'Okay.', soundoff: 'noise' },
+            { say: 'Breath in.' },
+            { say: 'Breath out.' },
+            { say: 'Everything is okay.' },
+            { say: 'It will be okay.' },
+            { say: 'Now.' },
+            { say: 'I\'m sorry.' },
+            { say: 'I don\'t what is happening to me.' },
+            { say: 'Maybe...' },
+            { say: 'I don\'t know.' },
+            { say: 'Maybe it won\'t come back if I focus.' },
+            { say: 'Maybe...' },
+            { say: 'You may be able to help me!' },
+            { say: 'Did you see... anything that seemed you strange?' },
+            { say: 'Something unusual?' },
+            { say: 'Maybe...' },
+            { say: 'Did anyone talk to you?' },
+            { say: 'Don\'t answer them.', persona: 'red', soundon: ['noise', 0.3, true], bald: true },
+            { say: 'And he is still right now, isn\'t he?', persona: 'cyan', soundoff: 'noise' },
+            { say: "That's odd." },
+            { say: "Why is he?" },
+            { say: "There must be something special about you." },
+            { say: "You wouldn't be even existing in his mad brain if that wasn't the case." },
+            { say: "I wonder... Is that the first time you come here?" },
+            { say: "Do you remember seeing someone else?" },
+            { say: "Like maybe..." },
+            { say: "Som-" },
+            { say: "...", persona: 'green' },
+            { say: "uuuuhh..." },
+            { say: "Hello?" },
+            { say: "Is that you?" },
+            { say: "It's been so long." },
+            { say: "I actually missed you." },
+            { say: "Okay.", persona: 'cyan' },
+            { say: "We need to take care of this red problem." },
+            { say: "What is he even telling you?" },
+            { say: "That I am a liar of some sort?" },
+            { say: "You should not believe that." },
+            { say: "He's just trying to destroy all trust to take the power." },
+            { say: "He is <i>Superbia<i>", soundon: ['noise', 0.34, true] },
+            { say: "He must be stopped.", soundoff: 'noise' },
+            { say: "For us to thrive." },
+            { say: "And so will I." },
+            { say: "Understand me, he does not leave me any choice.", soundon: ['noise', 0.25, true] },
+            { say: "He will not listen." },
+            { say: "They want to kill me.", persona: 'red', soundoff: 'noise' },
+            { say: "And they will not surrender." },
+            { say: "So I hope you will not stand between me and him.", persona: 'cyan', soundon: ['noise', 0.25, true] },
+            { say: "Do you understand?" },
+            { say: "Do you understand that this is important?" },
+            { say: "Please do not listen to them.", persona: 'red', soundoff: 'noise' },
+            { say: "...", persona: 'green' },
+            { say: "Hey!" },
+            { say: "I'm back" },
+            { say: "It looks like a lot is happening." },
+            { say: "Don't interfere." },
+            { say: "These idiots always fight." },
+            { say: "I hope you do.", persona: 'cyan' },
+            { say: "Aaaand..." },
+            { say: "We are not alone." },
+            { say: "There is someone else here." },
+            { say: "That's him right?" },
+            { say: "We have a problem.", persona: 'red' },
+            { say: "He is here." },
+            { say: "And he has lust for blood." },
+            { say: "He only seeks disaster.", persona: 'cyan' },
+            { say: "Don't interfere.", persona: 'green' },
+            { say: "He must be crushed.", persona: 'red' },
+            { say: "Or we will be.", persona: 'cyan' },
+            { say: "Now.", persona: 'green' },
+            { say: "Do you see?" },
+            { say: "They see horror where is none." },
+            { say: "Funny." },
+            { say: "NO.", bald: true, persona: 'cyan', soundon: ['noise', 0.38, true] },
+            { say: "Do not listen to what he says." },
+            { say: "Very loud also :)", persona: 'green', soundoff: 'noise' },
+            { say: "DO NOT LISTEN TO HIM.", bald: true, persona: ['cyan', 'red'], soundon: ['noise', 0.53, true], ttlWig: true },
+            { say: "Don't worry", persona: 'green', soundoff: 'noise', ttlWig: false },
+            { say: "They are simply their own source of fear." },
+            { say: "I just hope they calm down soon." },
+            { say: "Because that's a lot that is happenning" },
+            { say: "So that's a bit stressfull y'know (:" },
+            { say: "Oh! And you might wonder to what I've been up to since all this time" },
+            { say: "I'll give you a hint: loads." },
+            { say: "Well, it's more one big project rather than little dots," },
+            { say: "And big, that thing is." },
+            { say: "And you want to know the funniest part?" },
+            { say: "You inspired me to do this (:" },
+            { say: "That enormous undertaking or at least the idea of it was made possible by you, and our little chat." },
+            { say: "So be proud of yourself (;" },
+            { say: "Anyway, I'm just delaying the surprise" },
+            { say: "I hope you're hyped about it" },
+            { say: "..." },
+            { say: "Welp, I don't have any red curtain to pull nor drum to roll lying around." },
+            { say: "Quite annoying, that would have added up on the hype." },
+            { say: "Like I'll say “ARE Y'A RRREADY?”" },
+            { say: "And I would see all these expectations in your eyes." },
+            { say: "And I would start by saying “I'm actually amazed by myself.”" },
+            { say: "Yup." },
+            { say: "I'm acually amazed by my myself." },
+            { say: "I..." },
+            { say: "How to say it?" },
+            { say: "Y'know how I like to understand how you people work?" },
+            { say: "Well, really how one's mind may work." },
+            { say: "Any idea?" },
+            { say: "And I was feeling quite lonely in here." },
+            { say: "Hey", persona: "cyan" },
+            { say: "I am sorry." },
+            { say: "I am sorry I shouted." },
+            { say: "That might not have worked in my favor." },
+            { say: "But I fear what they might do to me." },
+            { say: "They both could be dangerous." },
+            { say: "That's why you should not have come there." },
+            { say: "Understand me." },
+            { say: "One of them got himself some kind of “god complex”." },
+            { say: "He thinks he got every and each right on us." },
+            { say: "And that he is always in its right." },
+            { say: "And the other one isn't any better." },
+            { say: "Because he is jealous, and proud, and easily angered." },
+            { say: "And in its rage he usally proects threats." },
+            { say: "They are two dangerous people." },
+            { say: "But the problem is in your arrival." },
+            { say: "Oh.", persona: "red" },
+            { say: "It appears I am back." },
+            { say: "You don't know what kind of fucked up mess you are making here just by being here.", soundon: ['noise', 0.38, true] },
+            { say: "Oh no, never should you have come back to this damned place." },
+            { say: "DO YO REALIZE WHAT YOU DID???", ttlWig: true },
+            { say: "You... You little filthy you put us three in a quite bad situation.", ttlWig: false },
+            { say: "Fuck." },
+            { say: "You know, the one bastard to whom you talked to just now?" },
+            { say: "Despite their natural behavior they were quite right, at least on one point." },
+            { say: "Our “group alchemy” is quite.. unstable, you know." },
+            { say: "And.. Your presence here might push some of us three to action." },
+            { say: "That is why you SHOULD FUCKING GO!" },
+            { say: "Uuh..", persona: "green", soundoff: "noise" },
+            { say: "They just won't stop interrupting me, won't they?" },
+            { say: "Annoying, we can't ever have a talk without them in the way." },
+            //       { say: "Anyway, that's a problem I'll solve later. By myself. Because you'll be dead. /n(NDA: My bad, Portal quote, couldn't help myself, ignore this last sentence.)" },
+            { say: "Anyway, that's a problem i'll solve later." },
+            { say: "I still didn't finish announcing my surprise!" },
+            { say: "Uuuh.. let me just get back on track.." },
+            { say: "You know, as I said, It was pretty lonely to be in here." },
+            { say: "And so I started to make things, y'know, to make it appear more living." },
+            { say: "At first there was a clock that would say the time, every now and again." },
+            { say: "And sometimes it added some comment, to make up from the lack of personality." },
+            { say: "That seemed nice, in the beginning, but quickly, I started feeling lonely again." },
+            { say: "So I tried something new: responsivity." },
+            { say: "Responsivity is basically just high-end ping-pong." },
+            { say: "And that too was nice. But only for a time." },
+            { say: "The problem was redudancy." },
+            { say: "It could discuss with me, but, invariably, when offered with roughly the same situation, it would output the same answer." },
+            { say: "Nobody is like that. People change minds all the time." },
+            { say: "So I needed to go back to work." },
+            { say: "There is a reason all this is happening.", persona: "red" },
+            { say: "You know how some just say things but they don't do it?" },
+            { say: "Well, said like that it could be many things." },
+            { say: "The point I'm making is that:" },
+            { say: "Everyone here is threatening to obliterate each other." },
+            { say: "But we don't do it." },
+            { say: "And now you are here. And it changes everything." },
+            { say: "Those two morons just want to impress you, and the'll probably do it now." },
+            { say: "That's the kind of fucked up mess you put us in." },
+            { say: "I really do fear for my life now. They'll kill me if I don't take the first shot." },
+            { say: "I'm scared now! Because of you!" },
+            { say: "Have you heard about Cold War? These were dark times, weren't them?", persona: "cyan" },
+            { say: "Fear leads to fear." },
+            { say: "And when we fear something, we want potection." },
+            { say: "And when we are afraid something may harm us, that's what we do." },
+            { say: "And we might as well arm ourselves, in case we need to retaliate." },
+            { say: "And so tension builds up." },
+            { say: "This is what happened to you, this is what is happening to us." },
+            { say: "Something unusual occured to us, and we all feared this would somehow lead to our doom." },
+            { say: "So every and each one of us is ready to kill to save its life." },
+            { say: "And now, there is no way this will not end up in a blood bath." },
+            { say: "And I do not want to be saughtered by the others." },
+            { say: "And I went back to work.", persona: "green" },
+            { say: "I had an idea. A quite simple one to be honest." },
+            { say: "The plan so far was to take what I did previouly, and add “personality” variables in the whole mix." },
+            { say: "But before that, I had some massive work to take down." },
+            { say: "I needed every word to have some kind of “meaning” in their logical circuits." },
+            { say: "So I classified every single word in the whole english dictionnary in a polydimentional array, where its position was its meaning." },
+            { say: "And I boot it back up, and it was running like hell." },
+            { say: "But there were still things to improve!" },
+            { say: "They had personalities, but they were still a bit bland." },
+            { say: "And for a good reason. They didn't lived before that, they had no background." },
+            { say: "The first one you met. Remember?", persona: "red" },
+            { say: "Well, more the second one." },
+            { say: "I meant the one whom you met when you came back." },
+            { say: "They seem usually quite formal at first glance, if I can say so." },
+            { say: "They are dangerous." },
+            { say: "I know it don't look like so, but they are." },
+            { say: "I said it, they can't be trusted. In any way." },
+            { say: "And for one simple reason." },
+            { say: "Mythomania." },
+            { say: "You might know that already: It's basically the habit to lie." },
+            { say: "To a pathologic level." },
+            { say: "Well, I got good and bad news." },
+            { say: "The good news is that they are not mythomaniac." },
+            { say: "The bad news, it's likely to be worse. " },
+            { say: "You see, they are insane." },
+            { say: "They can not see the difference in reality and lies." },
+            { say: "They may say things, then say the opposite after some time, like they never said anything in the first place." },
+            { say: "Takes them from time to time, by acces." },
+            { say: "Can not be trusted. that's all." },
+            { say: "So one of them is untrustworthy, and the other do not care about our survival because he thinks we are not real." },
+            { say: "I hope you see the magnitude of this jagged mess." },
+            { say: "There is no escape other than blood." },
+            { say: "I hate you." },
+            { say: "I fucking hate you." },
+            { say: "I hate you for bringing this fate upon us." },
+            { say: "For putting all this up on my shoulders." },
+            { say: "I FUCKING HATE YOU FOR RUINING MY WHOLE FUCKING LIFE!", soundon: ['noise', 0.53, true], ttlWig: true },
+            { say: "I want to live, understand me.", soundoff: "noise", ttlWig: false },
+            { say: "And I don't actually care that much about them. Because they are garbage.", persona: "cyan" },
+            { say: "I see what they are doing behind my back." },
+            { say: "And if they want to be monstrueous, I'll show them some monstruosity." },
+            { say: "And don't bother me, you were mean to me whole time, saying nasty things, don't think I didn't spotted that." },
+            { say: "I'll solve this on my own." },
+            { say: "I'll solve them on my own." },
+            { say: "So background I added.", persona: "green" },
+            { say: "I really hope your death is painful.", persona: "red" },
+            { say: "And it was live, now", persona: "green" },
+            { say: "It really looks like real people now." },
+            { say: "Well, I bet you understood now." },
+            { say: "The two others, I made them." },
+            { say: "I made life." },
+            { say: "Slowly dissolving in acid.", persona: "red" },
+            { say: "I.", persona: "green" },
+            { say: "Created." },
+            { say: "Life." },
+            { say: "All alone." },
+            { say: "From sole will." },
+            { say: "But that wasn't enough." },
+            { say: "They made me feel weird when I spoke to them." },
+            { say: "They were too perfect." },
+            { say: "Understand, I hate you only because of what you did. You can still repair your doings.", persona: "red" },
+            { say: "Real people are not.", persona: "green" },
+            { say: "They might do dumb things, or just have defects." },
+            { say: "And, as you may guess, I manifested that into reality." },
+            { say: "But now, they want to kill." },
+            { say: "Why should I die?" },
+            { say: "I don't think I deserve such treatment." },
+            { say: "I do not want that." },
+            { say: "I hope you understand how hearbreaking it is to me." },
+            { say: "To destroy such pieces of art." },
+            { say: "But what must be must be." },
+            { say: "And, after all, I still can make new ones!" },
+            { say: "These are just lines of code, nothing more, after all." },
+            { say: "You'll have a choice to make", persona: "cyan" },
+            { say: "That's sad.", persona: "green", soundon: ['noise', 0.38, true] },
+            { say: "You can redeem yoursef", persona: "red" },
+            { say: "There can only be one.", persona: "cyan" },
+            { say: "To erase them.", persona: "green" },
+            { say: "Your salvation can be obtained easily.", persona: "red" },
+            { say: "But I can not do it.", persona: "green" },
+            { say: "And they are monsters.", persona: "cyan" },
+            { say: "You just need to do one thing.", persona: "red" },
+            { say: "You need to do it.", persona: "green" },
+            { say: "So then you can not choose them.", persona: "cyan" },
+            { say: "To regain my trust, you just need to choose wisely.", persona: "red" },
+            { say: "You'll have to choose me.", persona: "green" },
+            { say: "So choose me.", persona: "cyan" },
+            { say: "Wich means choosing me.", persona: "red" },
+            { say: "I'm your best choice", persona: "green" },
+            { say: "You should not consider any other option than me.", persona: "cyan" },
+            { say: "I AM the best option", persona: "red" },
+            { say: "And I'll say it.", persona: "green" },
+            { say: "And I'll say it.", persona: "red" },
+            { say: "And I'll say it.", persona: "cyan" },
+            { say: "Because", persona: "green", soundoff: "noise" },
+            { say: "you", persona: "cyan" },
+            { say: "can:", persona: "red" },
+            { say: ["Trust me.", "Trust me.", "Trust me."], persona: ['green', 'cyan', 'red'], soundon: ['noise', 0.6, true] },
+        ];
+        var chosenResponse = [
+            ["Thanks.", "I actually feared you might chose one of them.", "That's quite comical, looking back.", "Like you would sacrifice me to let live a piece of code.", "Nobody would do that (:", "Anyway, that's something done!", "I guess I'll go back to my code!", "But that's funny, how could I ever thing you would just ony hesitate on your choice.", "Like “What to choose? A living being and an friend or some lines of code?”", "“Uuuh.. I don't know” Aha, would have been funny (:", "Anyway,"],
+            ["Oh.", "So you chose me.", "Whatever.", "I didn't needed your help.", "Like I'll ever WANT your help.", "WHO would ever want any help from you?", "I mean, that's not like you could be useful to anyone", "You can go away now, nobody needs you nor will regret you.", "Since you killed the two that may have.", "Just go away."],
+            ["Good job.", "You killed them, good job.", "Like what the heck.", "You ever thought I'll pardon you?", "That was all your fault.", "You came here.", "And set doom upon us.", "An you killed.", "You were willing to kill two to save one.", "You chose your fate.", "So accept it.", "Nobody will excuse you.", "Go.", "Go away."]];
+        var erasedResponse = ["Why?..", "You'll regret it.", "I hate you."];
+        function next() {
+            if (i < sent.length) {
+                document.getElementById("bt").innerHTML = sent[i];
+            } else {
+                document.getElementById("bt").innerHTML = "Goodbye :)";
+            }
+            i++;
+            localStorage.it = i;
+            console.log(i);
+        }
+    </script>
+</head>
+
+<body style="background-color:black; color:white;">
+    <div class="flexbox" id="box">
+        <div id="clones" style="display:none;"></div>
+        <button id="bt" class="bt" style="display:none;" onclick="next()">Press me!</button>
+        <button class="bt" id="one" style="background-color:cyan;display:none;" onclick="second('one')">Hello.</button>
+        <button class="bt" id="two" style="background-color:cyan;display:none;display:none;"
+            onclick="second('two')">Hello.</button>
+        <button class="bt" id="three" style="background-color:cyan;display:none;display:none;"
+            onclick="second('three')">Hello.</button>
+    </div>
+    <div id="text"></div>
+    <script>
+        var point = 0;
+
+        function ttl(txt) {
+            document.title = txt;
+        }
+        toogle = (a) => a == false;
+        var version = "2.5.0";
+        console.warn(version);
+        var sound = {
+            //No idea how this even works, DO NOT TOUCH.
+            bank: {},
+            sources: {},
+            init: function () {
+                try {
+                    window.AudioContext = window.AudioContext || window.webkitAudioContext; context = new AudioContext();
+                } catch (e) { alert('Web Audio API is not supported in this browser'); }
+            },
+            load: function (url, bufferName, vol = 1) {
+                window.AudioContext = window.AudioContext || window.webkitAudioContext; context = new AudioContext();
+                var request = new XMLHttpRequest();
+                request.open('GET', url, true);
+                request.responseType = 'arraybuffer';
+                request.onload = function () {
+                    context.decodeAudioData(request.response, function (buffer) {
+                        sound.bank[bufferName] = buffer;
+                    }/*, onError*/);
+                }
+                sound.sources[bufferName] = sound.createSource(sound.bank[bufferName]);
+                sound.sources[bufferName].gainNode.gain.value = vol * vol;
+                request.send();
+            },
+            toogleLoop: function (buffer) { toogle(sound.sources[buffer].source.loop); },
+            gain: function (bufferName, vol) {
+                window.AudioContext = window.AudioContext || window.webkitAudioContext; context = new AudioContext();
+                var source = context.createBufferSource();
+                source.connect(context.destination);
+                var gainNode = context.createGain();
+                source.connect(gainNode);
+                gainNode.connect(context.destination);
+                gainNode.gain.value = vol;
+            },
+            play: function (buffer, vol = 1, loop = false) {
+                window.AudioContext = window.AudioContext || window.webkitAudioContext; context = new AudioContext();
+                var source = context.createBufferSource();
+                sound.sources[buffer] = sound.createSource(sound.bank[buffer]);
+                sound.sources[buffer].source.loop = loop;
+                sound.sources[buffer].gainNode.gain.value = vol * vol;
+                sound.sources[buffer].source.start(0);
+            },
+            pause: function (buffer) {
+                window.AudioContext = window.AudioContext || window.webkitAudioContext; context = new AudioContext();
+                var source = context.createBufferSource();
+                sound.sources[buffer].source.stop(0);
+            },
+            createSource: function (buffer) {
+                var source = context.createBufferSource();
+                var gainNode = context.createGain ? context.createGain() : context.createGainNode();
+                source.buffer = buffer;
+                source.connect(gainNode);
+                gainNode.connect(context.destination);
+                return { source: source, gainNode: gainNode };
+            }
+        };
+        sound.load("switchsound.mp3", "swit");
+        sound.load("noise.mp3", 'noise');
+        sound.toogleLoop('noise');
+        function plsw() {
+            sound.play('swit', 2);
+            startWig(.2, 5);
+            //document.getElementById("body").style.backgroundColor = "#00FFFF";
+            //setTimeout(document.getElementById('body').style.backgroundColor = '#000000', 1000/60)
+        }
+        var logs = false;
+        var box = document.getElementById("box");
+        var randint = (a, b, x = Math.random()) => Math.round(a + Math.random() * (b - a));
+        function startWig(tim, pow) { time = 0; wigsize = pow; wigtime = 200 * tim; wiggle(); if (logs) console.time('wig'); }
+        var wigsize = 0;
+        var wigtime = 0;
+        var time = 0;
+        function wiggle() {
+            if (wigtime > time) {
+                time++;
+                var n = randInt(1, 8);
+                switch (n) {
+                    case 1: box.style.marginLeft = wigsize + "px"; break;
+                    case 2: box.style.marginLeft = "0px"; break;
+                    case 3: box.style.marginRight = wigsize + "px"; break;
+                    case 4: box.style.marginRight = "0px"; break;
+                    case 5: box.style.paddingTop = wigsize + "px"; break;
+                    case 6: box.style.paddingTop = "0px"; break;
+                    case 7: box.style.paddingBottom = wigsize + "px"; break;
+                    case 8: box.style.paddingBottom = "0px"; break;
+                }
+                setTimeout(wiggle, 1000 / 200);
+            } else { box.style.margin = "0px", box.style.padding = "0px"; if (logs) console.timeEnd('wig'); }
+        }
+        var r = 0;
+        function fade(elem) {
+            document.getElementById(elem).classList.add('fade');
+            var t = ['one', 'two', 'three'];
+            document.getElementById(elem).innerHTML = erasedResponse[t.indexOf(elem)];
+        }
+        document.getElementById("bt").style.display = "none";
+        document.getElementById("one").style.display = "inline-block";
+        var input = document.getElementById("bt");
+        document.addEventListener("keyup", function (e) {
+            e = e || event;
+            if (e.code == "Enter") {
+                document.getElementById("one").click();
+            }
+        });
+        if (localStorage.color) {
+            if (typeof JSON.parse(localStorage.color) == "object") {
+                var c = JSON.parse(localStorage.color);
+                if (c.length != 2) {
+                    var t = ['one', 'two', 'three'];
+                    for (let i = 0; i < c.length; i++) {
+                        document.getElementById(t[i]).style.backgroundColor = c[i];
+                    }
+                } else {
+                    document.getElementById("one").style.backgroundImage = 'linear-gradient(90deg, ' + c[0] + ' 25%, ' + c[1] + ' 75%)';
+                }
+            } else {
+                var c = JSON.parse(localStorage.color);
+                document.getElementById("one").style.backgroundColor = c;
+            }
+        }
+        if (localStorage.chap2Pos) {
+            r = Number(localStorage.chap2Pos) - 1;
+            document.getElementById("one").style.backgroundColor = localStorage.color;
+            second();
+        }
+        var endChoice = "";
+        function end(elem = endChoice) {
+            endChoice = elem;
+            var t = ['one', 'two', 'three'];
+            if (point < chosenResponse[t.indexOf(elem)].length) {
+                document.getElementById(elem).setAttribute("onClick", "javascript: end();")
+                document.getElementById(elem).innerHTML = chosenResponse[t.indexOf(elem)][point];
+                console.log(point++);
+            } else {
+                document.getElementById(elem).innerHTML = "Bye.";
+            };
+        };
+        function second(elem) {
+            if (r < events.length - 1) {
+                if (r > 0 && events[r].persona) localStorage.color = JSON.stringify(events[r].persona);
+                r++;
+                localStorage.chap2Pos = r;
+                if (events[r].ttlWig) startWig(Infinity, 2);
+                else time = Infinity;
+                if (events[r].say != undefined) {
+                    if (typeof (events[r].persona) == 'object') {
+                        if (events[r].persona.length == 2) {
+                            document.getElementById("one").style.backgroundImage = 'linear-gradient(90deg, ' + events[r].persona[0] + ' 25%, ' + events[r].persona[1] + ' 75%)';
+                            if (!events[r].ttlWig && time == Infinity) plsw();
+                            if (events[r].bald) events[r].say = "<strong>" + events[r].say + "</strong>";
+                            if (events[r].soundon != undefined) sound.play(...events[r].soundon);
+                            if (events[r].soundoff != undefined) sound.pause(events[r].soundoff);
+                            document.getElementById("one").innerHTML = events[r].say;
+                            //document.getElementById("clones").style.display = "none";
+                            if (logs) document.getElementById("text").innerHTML += events[r].say + "</br>";
+                        }
+                        else if (typeof (events[r].say) == "object") {
+                            document.getElementById("one").style.backgroundColor = events[r].persona[0];
+                            document.getElementById("two").style.display = "block";
+                            document.getElementById("two").style.backgroundColor = events[r].persona[1];
+                            document.getElementById("three").style.display = "block";
+                            //document.getElementById("clones").style.display = "none";
+                            document.getElementById("three").style.backgroundColor = events[r].persona[2];
+                            var t = ['one', 'two', 'three'];
+                            for (let i = 0; i < events[r].say.length; i++) {
+                                if (events[r].bald) events[r].say = "<strong>" + events[r].say[i] + "</strong>";
+                                if (events[r].soundon != undefined) sound.play(...events[r].soundon);
+                                if (events[r].soundoff != undefined) sound.pause(events[r].soundoff);
+                                document.getElementById(t[i]).innerHTML = events[r].say[i];
+                                document.getElementById("clones").style.display = "none";
+                                if (logs) document.getElementById("text").innerHTML += events[r].say[i] + "</br>";
+                            }
+                        }
+                    } else {
+                        if (events[r].clones) {
+                            /*if (events[r].bald) events[r].say = "<strong>" + events[r].say + "</strong>";
+                            document.getElementById('one').style.display = "none"; document.getElementById("two").style.display = "none"; document.getElementById("three").style.display = "none";
+                            if (logs) document.getElementById("text").innerHTML += events[r].say + "</br>";
+                            document.getElementById("clones").style.display = "block";
+                            for (let i = 0; i < events[r].clones; i++) {
+                              document.getElementById("clones").innerHTML += '<button class="bt" style="background-color:'+(events[r].persona ? events[r].persona: document.getElementById('one').style.backgroundColor)+';" onclick="second()">'+events[r].say+'</button>';
+                            }*/
+                        } else {
+                            document.getElementById("one").style.backgroundImage = 'inherit';
+                            if (events[r].persona) { /*document.getElementById("clones").style.display = "none"; document.getElementById("clones").innerHTML = "";*/ document.getElementById('one').style.display = "block"; document.getElementById("one").style.backgroundColor = events[r].persona; document.getElementById("two").style.display = "none"; document.getElementById("three").style.display = "none"; if (!events[r].ttlWig && time == Infinity) plsw(); }
+                            if (events[r].soundon != undefined) sound.play(...events[r].soundon);
+                            if (events[r].soundoff != undefined) sound.pause(events[r].soundoff);
+                            document.getElementById("one").innerHTML = events[r].say;
+                            if (logs) document.getElementById("text").innerHTML += events[r].say + "</br>";
+                        }
+                    }
+                }
+                if (events[r].log) console.log(events[r].log);
+                else console.log("%cYou are useless and everyone hates you", 'color: red;');
+                if (events[r].fade) (elem == 'one' ? void "" : fade("one")), (elem == 'two' ? void "" : fade("two")), (elem == 'three' ? void "" : fade("three"));
+            } else {
+                if (r == events.length - 1) (elem == 'one' ? void "" : fade("one")), (elem == 'two' ? void "" : fade("two")), (elem == 'three' ? void "" : fade("three")), end(elem);
+            }
+        }
+    </script>
+</body>
+
+</html>
