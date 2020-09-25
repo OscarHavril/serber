@@ -71,66 +71,44 @@
 
 <body style="background-color:black;">
     <p id="top" style="text-align:center; color:black;">O</p>
-    <script src="statements.js"></script>
     <section id="flexy" class="flexZone" style="background-color:black; color:white;">
-        <div style="background-color:peru;">
-            <pre>
-<h1><b>My Games:</b></h1>
-<a href="https://Delta.github.io/the-journey/" title="Go and break the game" target="_blank"><b>Labyrinth</b> (2019)</a> 
-</pre>
-            <p class="desc">
-                Temporary name, not working yet.
-            </p>
-            <pre>
-<a href="http://orteil.dashnet.org/igm/?g=7n7Ac4Wv" title="Don't. Please" target="_blank"><b>MineClicker</b> (2018)</a> 
-</pre>
-            <p class="desc">
-                Abandoned, dirty.
-            </p>
-            <pre>
-<a href="javascript:void(0)" title="Well, Not yet." target="_blank"><b>Geneticorp</b> (2017-2019)</a> 
-</pre>
-            <p class="desc">
-                Unfinished Starcraft-like cellular management game. You can also reach the <a
-                    href="https://discord.gg/ZfcW7ff" style="text-decoration:none;color:black;"
-                    title="Join the Discord community!" target="_blank"><b>Discord</b></a>.
-            </p>
-        </div>
-        <div style="background-color:grey;">
-            <pre>
-<h1><b>Drawings:</b></h1>
-<a href="https://crazyband.home.blog/" title="Go to our magnificent website" target="_blank"><b>CrazyBand</b> (2018-2019)</a> 
-</pre>
-            <p class="desc">
-                Some cartoons lies here.
-            </p>
-            <pre>
-<a href="https://www.instagram.com/Delta/" title="Go check" target="_blank"><b>Instagram</b> (2019)</a> 
-</pre>
-            <p class="desc">
-                Some cartoons, mostly stolen from CrazyBand, and exclusive drawings.
-            </p>
-            <pre>
-<a href="https://www.pixilart.com/Delta" title="This is dusty" target="_blank"><b>Pixilart</b> (2018)</a> 
-</pre>
-            <p class="desc">
-                Unfinished drawings, almost-abandoned, not very interesting.
-            </p>
-        </div>
-
-        <div style="background-color:limegreen;">
-            <pre>
-<h1><b>Bookshelf:</b></h1>
-<a href="https://www.wattpad.com/user/Delta" title="Wattpad, weird french books." target="_blank"><b>Wattpad</b> (2017-2019)</a> 
-</pre>
-            <p class="desc">
-                "Regularily updated". Hopefully.
-                Books that could deserve reading:
-            </p>
-
-        </div>
     </section>
     <script>
+        //random satements cus I seemed funny so here it is. Some of them inspired by the Minecraft also random statement thing.
+        var statments = [
+            "Life is.. *looks at notes* wait.. *frantically flips through papers* oh no, oh no oh no",
+            "Existence implies influence, influence implies existence. Yeah I did philosophy thingy.",
+            "Procrastination is my word.",
+            "Any computer is a laptop if you're brave enough!",
+            "Doesn't avoid double negatives!",
+            "pls rt",
+            "sqrt(-1) love you!",
+            "Orthographicaly correct!",
+            "PHP free!",
+            "Being annoying is the best thing you could ever imagine",
+            "There\'s really no hard limit to how long these statements can be and to be quite honest I\'m rather curious to see how far we can go. Adolphus W. Green (1844–1917) started as the Principal of the Groton School in 1864. By 1865, he became second assistant librarian at the New York Mercantile Library; from 1867 to 1869, he was promoted to full librarian. From 1869 to 1873, he worked for Evarts, Southmayd & Choate, a law firm co-founded by William M. Evarts, Charles Ferdinand Southmayd and Joseph Hodges Choate. He was admitted to the New York State Bar Association in 1873. Anyway, how\'s your day been?",
+            "H̶̗̣̱̳̟̼̥̦̘̰̯̜̊̃́͊̀̇̈̿̓̆̾͘͜͠ͅǫ̷̨̼̪̰̮͍̮͚̮͙̮͉̗̪͖̝̞͖̭͇̬̩̫͖̩̼̟̫̱̒̓̈́͛̒́̒̒̿̀͊̊̓̒͛̂̅͆͑̿̑̃͘͜͝ͅw̶̢̛̛͎̘̣̼͖̦̖̜̩̩̤̬͎̰̗͇͍̰̗̹͈͚͉͖͈͉̣̐͌̿̈̽̿͗̑̽̃̇̂̓͗̀͌̽̀͗̀̒̑͛̿̚͜͠ͅͅ ̵̡̢͎̦̮̮̠̬̥̼̯̥͖̪̯̦̦͈̣̐̉̐̍̐͂͌͗̈̒̄͒́̍ͅḑ̴̛̛͓̖̠͉̅̓͒̀̋̈́͛͛̐̀̏̑̚͠͠͠o̶̢̨̨̡̦̲̟͍̩̜̲̳͓͚̙͇̱͔̱̼̣̱͎̪̫̲̬̰̿̉̉̎͌̈́̌̈́̊̈́͜͜͝ͅȩ̴̛̟̥͇̜̥̲̞̟̺̜͕̜̫͕̣̫͕̰̪̖͗̔͆̈́̓͒̈̈́͂̚̕̚ṣ̸̢̨͇̠̥̘̝͙̻̗͉̺̗̳̹͈̬̺̼͉̦͍͎̮̮̫͇̽͋̿̀͊̽̑͐́̇́̉̅͋̉͂͋̊̽̎̎̋̏̈͑͜͝ͅ ̵̦̣̏̽̄̈͒́͆̊̌́̓͘͝Z̸̨̛̲̳̫̞͖̬̣̳̤̩̖͛́̆̎̏̀͐̆̈́̓́̔̋͂͒̍̍͗͌̓̀͘͝͝ḁ̵̗͖̟͇̖̩̹̟̹̮͉̜̤̜̫̞͉̘̻̤͕̱̰̳̆̓̑͛̒̔̒̌̿̏̓̀̿̈̏́͆͜ͅl̶̢̡̨̢̨̛̛̼̼̙͇̪̝̮̠̩̤̮̭̤̰̗̠͎̣̮̞̻͚̻̘̼̳̔͆͒̔̑͒̑̀͋̓̀͂̄͊̋́̓͝g̴̨̱̦͚͔̫̥̙̬̺͎͐̐͋̇̈́̽͗͊̄̓͗̌̏̈́̅̈̽͗̀̋̅͊̿̅͐͘͘͘͜͝ò̸̻̰̈́̌ ̴̛͙̱̳͖̹̺̊̑̊̋̏͗́͌̚͘t̴̡̨̧̨̬̜̱̱̹̤̥͍̪̖̪̰̜̹̪͔̻͖̭͆̔͒̐̊̆͗̆̅́̓̕͝ͅe̸̛̙̳̤̠̳͐̓̓̈́͗͗̈́͗̍̄͐̅͋͂̈́̀͒̏̊̾̅͘͘͝͠͝ͅx̴̧̺̖̙͇̖̼̦̯͉͕̝̗͍̔͛̉̒͋̒́͗̂͆͑̀̑̌͊͒̓̽̍͌̈́̈̚̕͠͝ͅţ̵̡̡̡͈̞̦͈̗̥͇͇͙͚̅͛̉̒̀͗̄̇̓̈́̎̅ ̵̡̢̛͕̗̝̻͙̯͖̯̝͈̰͂̌̐̿͌̔ẅ̷̛̺́͛̈͌̅̎̍̊̓͋̒̎̑̔͌̓̒͂͗̏̊̕̕͠ơ̴͈̥̣̈́̏̊̽͗̒̇͑̎̋͂͐̊͝r̴̢̧͇̣͚̭̼̲̥̫̣͇̜̪̭̻͙̬̫̯̝̃̇͐̍͐́̓ͅk̵̨̤̭̩͙̦̻͈̗̹̣͉̯̦͕̺̹̙͓̲̲̮̃͗̓̀͂̓̈́̄̑͋̿̅̉̔̄͝͝?̷̝̞̟̻̘̻͚̭̟̯̯̲̼̭̲͙̫̳͕̰͖̥̏̃͊̍̏͑̇̑̎̄̂̉́̎͌̈́̽̋͗̒̏̎͘͘͜ͅ ̶̧̢̢̡̛̺̟̭͓̺̬͉͕͍̻̘͔̙̱̘͕͔̤̥̳̬̭̯̰̯̏̋̓͐̇̈́̒̊̓̅̾̈̃̉͘̚͜",
+            "150% hyperbole!",
+            '<span style="color:#0000AA;">C</span><span style="color:#00AA00;">o</span><span style="color:#00AAAA;">l</span><span style="color:#AA0000;">o</span><span style="color:#AA00AA;">r</span><span style="color:#FFAA00;">m</span><span style="color:#AAAAAA;">a</span><span style="color:#555555;">t</span><span style="color:#5555FF;">i</span><span style="color:#55FF55;">c</span>',
+            "This satement is FALSE!",
+            "Do a set of all sets contain itself ?",
+            "You're funny",
+            "Please stop",
+            "Mostly bug free.",
+            "I won't do that if I were you",
+            "Math is cool",
+            "Stay safe!",
+            "What",
+            "Trans Rights!",
+            "Pwotat. Thank you for coming to my TED talk.",
+            "Yeh",
+            "Note: This is for the most part a curation. as it, it may include errors.",
+            "This message will never appear on the top bar, isn't that weird?"
+        ];
+        var l = statments.length - 2;
+        var x = Math.floor(Math.random() * l);
+        document.getElementById("top").innerHTML = statments[x];
+        document.getElementById("top").style.color = "white";
         var Category = function () {
             this.name = "Unnamed Category";
             //this.description = "A Category";
@@ -157,7 +135,7 @@
             this.beginDate = "1970";
             this.endDate = "";
         };
-        
+
         var games = new Category();
         games.name = 'Gaems';
         games.color = 'peru';
@@ -170,11 +148,63 @@
         var theButton = new Item();
         theButton.name = 'The Button';
         theButton.description = 'And what about all these unfinished projects? All this code, all these lines, what do they have to say about their loneliness? And now you will listen to them.';
-        theButton.alt = 'Idk';
+        theButton.alt = 'There is this button, and the void.';
+        theButton.link = 'http://51.91.159.136:3333/project';
         theButton.beginDate = "2018";
+        theButton.endDate = "2019";
         games.add(theButton);
+        var bt2 = new Item();
+        bt2.name = 'The Button (Chapter two)';
+        bt2.description = 'You visited the antichamber of nothingness, but that was not enough? You still have lust for more? Then come, and see the second chapter unveil before you. You are the Harbinger. No one can stop you.';
+        bt2.alt = 'See the blood on their hands, and witness the end of all.';
+        bt2.link = 'http://51.91.159.136:3333/theButtons';
+        bt2.beginDate = "2019";
+        bt2.endDate = "2020";
+        games.add(bt2);
+
+        var art = new Category();
+        art.name = 'Artz';
+        art.color = 'limegreen';
+        var inst = new Item();
+        inst.name = 'Instagramz';
+        inst.description = 'Where I draw thingz. Yeah drawing is not my strong side';
+        inst.alt = 'Yeh';
+        inst.link = 'https://www.instagram.com/this_mad_delta/';
+        inst.beginDate = "2019";
+        art.add(inst);
+        var cb = new Item();
+        cb.name = 'Crazyband';
+        cb.description = 'Cartoons and jokes, whith the help of a friend.';
+        cb.alt = '"Ahahah."';
+        cb.link = 'https://crazyband.home.blog/';
+        cb.beginDate = "2018";
+        cb.endDate = "2019";
+        art.add(cb);
+        var cb = new Item();
+        cb.name = 'Pixilart';
+        cb.description = 'Me doing pixel art was an idea as bad as me making music.';
+        cb.alt = 'Ugly is an understatement.';
+        cb.link = 'https://www.pixilart.com/Delta';
+        cb.beginDate = "2018";
+        cb.endDate = "2019";
+        art.add(cb);
+
+        var book = new Category();
+        book.name = 'Boek';
+        book.color = 'grey';
+        var wtt = new Item();
+        wtt.name = 'Wattpad';
+        wtt.description = 'Yes I did some writting do not question it. Also wattad is shit.';
+        wtt.alt = 'GET BOEK';
+        wtt.link = 'https://www.wattpad.com/user/Delta';
+        wtt.beginDate = "2017";
+        wtt.endDate = "2019";
+        book.add(wtt);
+
 
         games.display();
+        book.display();
+        art.display();
     </script>
 </body>
 
