@@ -3,7 +3,7 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var logs = [];
-var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+//var ip = res.header('x-forwarded-for') || res.connection.remoteAddress;
 //var parties = [];
 function shuffle(array) {
     for (i = array.length - 1; i > 0; i--) {
@@ -71,7 +71,7 @@ io.sockets.on('connection', function (socket) {
     socket.emit('connected', 'Connection tunnel on point: ' + party);
 
     socket.on('connectionAdvisor', function (message) {
-        logs.push({ time: new Date(), ip: ip, emplacement: party, });
+        logs.push({ time: new Date(), /*ip: ip,*/ emplacement: party, });
     });
 
     socket.on('getlogs', function (message) {
