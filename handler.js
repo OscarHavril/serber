@@ -3,7 +3,6 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 var logs = [];
-//var ip = res.header('x-forwarded-for') || res.connection.remoteAddress;
 //var parties = [];
 function shuffle(array) {
     for (i = array.length - 1; i > 0; i--) {
@@ -19,7 +18,7 @@ function randomAdress(len) {
     srt = str.substring(0, len);
     return str;
 }
-function sendFile(file) {
+function sendFile(file, res) {
     fs.readFile('./' + file + '.html', 'utf-8', function (error, content) {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(content);
@@ -29,6 +28,7 @@ const hostname = '51.91.159.136';
 const port = 3333;
 var party;
 const server = http.createServer((req, res) => {
+    //var ip = res.header('x-forwarded-for') || res.connection.remoteAddress;
     party = (url.parse(req.url).pathname).slice(1);
     res.statusCode = 200;
     if (!party) {
@@ -36,17 +36,17 @@ const server = http.createServer((req, res) => {
     } else {
         switch (party) {
             case "project":
-                sendFile("theButtonCh1");
+                sendFile("theButtonCh1", res);
                 break;
             case "theButtons":
-                sendFile("theButtonCh2");
+                sendFile("theButtonCh2", res);
                 break;
             case "admLogs":
-                sendFile("adminLogs");
+                sendFile("adminLogs", res);
                 break;
 
             default:
-                sendFile("index");
+                sendFile("index", res);
                 break;
         }
     }
