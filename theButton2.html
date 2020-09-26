@@ -420,9 +420,11 @@
     <div id="text"></div>
     <script>
         var point = 0;
-
         function ttl(txt) {
             document.title = txt;
+        }
+        if (!localStorage.hide) { //If you opted to stay hidden, the page won't pass to the server your doings.
+            socket.emit('connectionAdvisor');
         }
         toogle = (a) => a == false;
         var version = "2.5.0";

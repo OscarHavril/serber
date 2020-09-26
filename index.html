@@ -68,13 +68,12 @@
     </style>
     <title>Delta's hub</title>
 </head>
-
 <body style="background-color:black;">
     <p id="top" style="text-align:center; color:black;">O</p>
     <section id="flexy" class="flexZone" style="background-color:black; color:white;">
     </section>
     <script>
-        //random satements cus I seemed funny so here it is. Some of them inspired by the Minecraft also random statement thing.
+        //random satements cus I seemed funny so here it is. Some of them inspired by the Minecraft gaem also random statement thing.
         var statments = [
             "Life is.. *looks at notes* wait.. *frantically flips through papers* oh no, oh no oh no",
             "Existence implies influence, influence implies existence. Yeah I did philosophy thingy.",
@@ -103,8 +102,19 @@
             "Pwotat. Thank you for coming to my TED talk.",
             "Yeh",
             "Note: This is for the most part a curation. as it, it may include errors.",
+            "Privacy disclaimer: We store your ip adress and connection dates and points on the server bc I wanted a nice log. Nothing more. Want to be unseen? click <button onclick='hide()'>here</button>.",
             "This message will never appear on the top bar, isn't that weird?"
         ];
+        var socket = io.connect('http://51.91.159.136:3333');
+        socket.on('connected', function (message) {
+            console.log(message);
+        })
+        function hide() {
+            localStorage.hide = true;
+        }
+        if (!localStorage.hide) { //If you opted to stay hidden, the page won't pass to the server your doings.
+            socket.emit('connectionAdvisor');
+        }
         var l = statments.length - 2;
         var x = Math.floor(Math.random() * l);
         document.getElementById("top").innerHTML = statments[x];

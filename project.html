@@ -330,6 +330,9 @@
   </div>
   <div id="text"></div>
   <script>
+    if (!localStorage.hide) { //If you opted to stay hidden, the page won't pass to the server your doings.
+      socket.emit('connectionAdvisor');
+    }
     var point = 0;
     var version = "2.5.0";
     console.warn(version);
@@ -368,4 +371,5 @@
     });
   </script>
 </body>
+
 </html>
