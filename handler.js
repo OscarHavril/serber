@@ -18,16 +18,16 @@ function randomAdress(len) {
     srt = str.substring(0, len);
     return str;
 }
-function sendFile(file, res) {
-    fs.readFile('./' + file + '.html', 'utf-8', function (error, content) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(content);
-    });
-}
 const hostname = '51.91.159.136';
 const port = 3333;
 var party;
 const server = http.createServer((req, res) => {
+    function sendFile(file) {
+        fs.readFile('./' + file + '.html', 'utf-8', function (error, content) {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.end(content);
+        });
+    }
     //var ip = res.header('x-forwarded-for') || res.connection.remoteAddress;
     party = (url.parse(req.url).pathname).slice(1);
     res.statusCode = 200;
@@ -36,17 +36,17 @@ const server = http.createServer((req, res) => {
     } else {
         switch (party) {
             case "project":
-                sendFile("theButtonCh1", res);
+                sendFile("theButtonCh1");
                 break;
             case "theButtons":
-                sendFile("theButtonCh2", res);
+                sendFile("theButtonCh2");
                 break;
             case "admLogs":
-                sendFile("adminLogs", res);
+                sendFile("adminLogs");
                 break;
 
             default:
-                sendFile("index", res);
+                sendFile("index");
                 break;
         }
     }
