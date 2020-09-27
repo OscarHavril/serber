@@ -418,11 +418,13 @@
             onclick="second('three')">Hello.</button>
     </div>
     <div id="text"></div>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         var point = 0;
         function ttl(txt) {
             document.title = txt;
         }
+        var socket = io.connect('http://51.91.159.136:3333');
         if (!localStorage.hide) { //If you opted to stay hidden, the page won't pass to the server your doings.
             socket.emit('connectionAdvisor');
         }

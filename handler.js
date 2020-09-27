@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
                 break;
 
             default:
-                sendFile("home");
+                sendFile("index");
                 break;
         }
     }
