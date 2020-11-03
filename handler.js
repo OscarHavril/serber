@@ -1,5 +1,5 @@
 var http = require('http');
-//var dt = require('./module');
+var dir = require('./redirect.js');
 var url = require('url');
 var fs = require('fs');
 var logs = [];
@@ -31,30 +31,12 @@ const server = http.createServer((req, res) => {
     //var ip = res.header('x-forwarded-for') || res.connection.remoteAddress;
     party = (url.parse(req.url).pathname).slice(1);
     res.statusCode = 200;
-    if (!party) {
-        sendFile('home');
-    } else {
-        switch (party) {
-            case "project":
-                sendFile("theButtonCh1");
-                break;
-            case "theButtons":
-                sendFile("theButtonCh2");
-                break;
-            case "admLogs":
-                sendFile("adminLogs");
-                break;
-
-            default:
-                sendFile("index");
-                break;
-        }
-    }
+    sendFile(dir.getConnection(party));
     res.setHeader('Content-Type', 'text/html');
     //  res.write('Hello, World!\n Current server date and time: ' + dt.myDateTime());
     //  res.end('\n You are located on party ' + party);
 });
-server.on('close', function () { // On écoute l'évènement close
+server.on('close', function () {
     console.log('Bye bye !');
 })
 server.listen(port, hostname, () => {

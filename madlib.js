@@ -1372,7 +1372,7 @@ var platformer = {
     display: undefined,
     bgc: undefined,
     player: {},
-    settings: { g: -9.8 },
+    settings: { g: -9.81 },
     respawn: function (x, y, w, h, jumpHeight, accTime, decelTime, maxSpd, isTransparent = false, isVisible = false, color = '', index = -1) {
         platformer.player = { pos: [x, y], size: [w, h], isTransparent: isTransparent, isVisible: isVisible, color: color, index: index, speed: [0, 0], jumpHeight: jumpHeight, spdTime: [accTime, decelTime], maxMotionSpd: maxSpd }
     },

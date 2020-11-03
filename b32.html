@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart™ Timetable for group B32.">
+    <meta name="author" content="Ardath">
+    <title>TimeTable</title>
+    <style>
+        #settings>.btn {
+            border-radius: 5px;
+            background-color: #272727AC;
+            border: none;
+            color: white;
+            padding: 9px 7px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 2px 2px 4px black;
+            cursor: pointer;
+        }
+        #settings>.btn:hover {
+            background-color: #303030;
+        }
+        #settings>.btn:active {
+            box-shadow: 1px 1px 2px black;
+        }
+        #settings {
+            display: flex;
+            padding: 0px 20px 3px 20px;
+            z-index: 2;
+            box-shadow: 0px 2px 4px black;
+            position: fixed;
+            height: 6%;
+            width: 100%;
+            align-items: center;
+            align-content: space-around;
+            background-color: #151515AC;
+            left: 0px;
+            top: 0px;
+        }
+        #settings:hover>.btn {
+            background-color: #272727FF;
+        }
+        #settings:hover {
+            background-color: #151515FF;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        .flexZone {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            align-content: space-around;
+            width: 90%;
+            height: 90%;
+        }
+        .flex {
+            margin: 2px;
+            height: 95%;
+            width: 19%;
+        }
+        .bx {
+            display: flex;
+            flex-direction: row;
+            background-color: #202020;
+            box-shadow: inset 2px 2px 4px  black;
+            cursor: default;
+        }
+        .bar {
+            box-shadow: inherit
+        }
+        .dot {
+            box-shadow: inset 0px 2px 4px  black;
+        }
+        .bx:hover {
+            background-color: #262626;
+            box-shadow: 3px 3px 4px  black;
+        }
+        .bx:hover>.bar {
+            box-shadow: 0px 3px 4px  black;
+        }
+        .bx:hover>.dot {
+            box-shadow: 0px 0px 0px  black;
+        }
+        .courseBtn {
+            box-shadow: inset 2px 2px 4px  black;
+            padding: 3px;
+            background-color:#151515;
+            border-radius:4px;
+            cursor:pointer;
+        }
+        .courseBtn:hover {
+            background-color:#252525;
+        }
+    </style>
+</head>
+
+<body style="background-color: #101010; color: white;">
+    <section id="settings">
+        <div onclick="changeLinkMode()" class="btn">Link Mode: <div style='color:pink; display: inline;' id="lonk"></div></div>
+    </section>
+    <div style='height: 7vmin'></div>
+    <section id="flexy" class="flexZone" style="background-color:black; color:white;"></section>
+    <script>
+        var linkMode = "_self";
+        var lonkModes = [["Same Page", "_self", "pink"], ["New Page", "_blank", "cyan"]];
+        if (localStorage.linkMode) {
+            linkMode = localStorage.linkMode;
+            if (linkMode == "_self") {
+                i = 0
+            } else {
+                i = 1
+            }
+            document.getElementById("lonk").style.color = lonkModes[i][2];
+            document.getElementById("lonk").innerHTML = lonkModes[i][0];
+        }
+        function changeLinkMode() {
+            if (linkMode == "_self") {
+                i = 1
+            } else {
+                i = 0
+            }
+            linkMode = lonkModes[i][1];
+            document.getElementById("lonk").innerHTML = lonkModes[i][0];
+            document.getElementById("lonk").style.color = lonkModes[i][2];
+            localStorage.linkMode = linkMode;
+        }
+        var restrict =  (a, min = 0, max = Infinity) => (a > min && a < max ? a : (a < min ? min : max));
+        var Type = function () {
+            this.name = "Type I Guess";
+            this.description = "A Course";
+            this.color = "white";
+        };
+        var Course = function () {
+            this.name = "Unnamed Course";
+            this.description = "A Course";
+            this.color = "white";
+            this.link = "javascript:void(0)"
+            //this.add = function (Item) {
+            //    this.items.push(Item);
+            //}
+            //this.items = [];
+            //this.display = function () {
+            //    var result = '<div style="background-color:' + this.color + ';"><pre><h1><b>' + this.name + ':</b></h1></br>';
+            //    for (let i = 0; i < this.items.length; i++) {
+            //        result += '<a href="' + this.items[i].link + '" title="' + this.items[i].alt + '" target="_blank"><b>' + this.items[i].name + ':</b> (' + this.items[i].beginDate + (this.items[i].endDate ? "-" + this.items[i].endDate : "") + ')</a></pre><p class="desc">' + this.items[i].description + '</p>'
+            //        if (i < this.items.length - 1) result += '<pre>';
+            //    }
+            //    result += '</div>';
+            //    document.getElementById('flexy').innerHTML += result;
+            //};
+        };
+        function toTime (t) {
+            var tps = Math.round(60 * (t - Math.floor(t)));
+            return Math.floor(t) + "h" + (tps < 10 ? "0" + tps : tps);
+        }
+        var Class = function () {
+            this.name = "Unnamed Class";
+            this.course = undefined;
+            this.type = undefined;
+            this.link = "javascript:void(0)";
+            this.alt = "A link to the class";
+            this.day = 0;
+            this.begin = 7.45;
+            this.len = 1.5;
+            this.uuid = "";
+            this.fill = function () {
+                var box = document.getElementById(this.uuid);
+                box.style.borderRadius = "10px";
+
+                //box.onclick = window.open(this.link);
+                //console.log(box.onclick)
+                box.innerHTML = '<div class="bar" style="background-color:'+ this.course.color + '; height:'+ box.style.height +'; width:13px; border-radius:10px 0px 0px 10px;"></div>';
+                box.innerHTML += '<div style="padding: 7px 4px;"><div><span class="courseBtn" id="course' + this.uuid + '" onclick="openLink(\'https://moodle.univ-tlse3.fr/course/view.php?id=' + this.course.link + '\', \'course' + this.uuid + '\')">' + this.name + '</span></div><div>' + toTime(this.begin) + "-" + toTime(this.begin + this.len) + '</div></div>';
+                box.innerHTML += '<div class="dot" style="background-color:'+ this.type.color + '; height:15px; width:15px; border-radius:4px 10px 4px 4px; position: absolute; right: 0px;"></div>';
+            };
+        };
+        var courses = {
+            buildCourse: function (name, color, link = "javascript:void(0)", description = "A Course") {
+                var c = new Class();
+                c.name = name;
+                c.color = color;
+                c.description = description;
+                c.link = link;
+                courses.addCourse(c);
+            },
+            addCourse: function (course) {
+                courses[course.name] = course;
+            },
+        }
+        var types = {
+            buildType: function (name, color, link = "javascript:void(0)", description = "A Type") {
+                var c = new Class();
+                c.name = name;
+                c.color = color;
+                c.description = description;
+                //c.link = link;
+                types.addType(c);
+            },
+            addType: function (type) {
+                types[type.name] = type;
+            },
+        }
+        var units = [
+            [{ course: "Anglais", overrideDist: false, type: "CM", week: 1, start: 7, len: 1.5 },
+            { course: "DVE", type: "CM", week: 2, start: 13.75, len: 2.17, link:'https://us02web.zoom.us/j/81877878649?pwd=bHFPTU5kNWFhaEt0RFpMaWZrRHhyUT09' },
+            { course: "SN", type: "CM", start: 16.09, len: 2.17 },
+            ],
+            [{ course: "Info", type: "TP", start: 7.75, len: 2.17},
+            ],
+            [{ course: "Maths", type: "CM", start: 7.75, len: 1.5 },
+            { course: "Physique", type: "CM", start: 9.42, len: 1.5 },
+            { course: "Info", type: "CM", start: 11.25, len: 1 },
+            { course: "Physique", type: "TD", start: 13.75, len: 1.5 },
+            { course: "Maths", type: "TD", start: 15.42, len: 1.5 },
+            { course: "Chimie", type: "TD", start: 17.09, len: 1.5 },
+            ],
+            [{ course: "DVE", type: "TD", start: 7.75, len: 2.17 },
+            { course: "SA", type: "TD", start: 10.09, len: 2.17 },
+            { course: "Maths", type: "TD", start: 13.75, len: 1.5 },
+            { course: "OMD", type: "TD", start: 15.42, len: 1.5 },
+            { course: "Chimie", type: "TD", start: 17.09, len: 1.5 },
+            ],
+            [{ course: "SA", type: "CM", start: 13.75, len: 2.17 },
+            { course: "OMD", type: "CM", start: 16.09, len: 1 },
+            { course: "Maths", type: "CM", start: 17.25, len: 1.5 },
+            ],
+        ];
+        function makeClass(e, day) {
+            var c = new Class();
+            c.name = e.course;
+            c.type = types[e.type];
+            c.course = courses[e.course];
+            c.day = day;
+            (e.link ? c.link = e.link : null);
+            c.begin = e.start;
+            c.len = e.len;
+            return c;
+        }
+        var fb = document.getElementById("flexy");
+        var bgc = "#101010";
+        fb.style.width = window.innerWidth + "px";
+        fb.style.height = window.innerHeight + "px";
+        fb.style.backgroundColor = bgc;
+        function getWeekNumber(d) {
+            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+            var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+            return weekNo;
+        }
+        function openLink(link, id) {
+            dm = document.querySelectorAll( ":hover" );
+            dm = dm[dm.length - 1]; 
+            if (dm.id == document.getElementById(id).id) {
+                if (link != "javascript:void(0)") {
+                    window.open(link, linkMode);
+                }
+            } else {
+                console.log(dm.id + " is not " + id + " or " + id + " do not exist. Click invalidated")
+            }
+        }
+        function addBlock(d, b) {
+            d.innerHTML += "<div id='" + b.uuid + "' class='course bx' onclick='openLink(\"" + b.link + "\", \"" + b.uuid + "\");' style='height:" + (window.innerHeight * b.len / 20) + "px; position: relative;'></div>"; //style='top:" + b.getPos();
+        }
+        function addSp(d, l) {
+            d.innerHTML += "<div style='height:" + (window.innerHeight * l / 15) + "px;'></div>";
+        }
+        var day = new Date().getDay();
+        var week = getWeekNumber(new Date(Number(new Date()) + 86400000));
+        var cnames = ["Anglais", "Maths", "Info", "Physique", "Chimie", "OMD", "SA", "DVE", "SN"];
+        var clrs = ["#F00060", "#80F000", "#0000F0", "#FFD000", "#999999", "#30A000", "#FFA2FF", "#4040FF", "#8F074D"];
+        var cids = ["2447", "1278", "2433", "2596", "2592", "1128", "2734", "2745", "2440"];
+        cnames.forEach((n, i) => {
+            courses.buildCourse(n, clrs[i], cids[i]);
+        });
+        types.buildType("CM", 'blue');
+        types.buildType("TD", 'purple');
+        types.buildType("TP", 'yellow');
+        function dispWeek(week) {
+            for (i = 0; i < 5; i++) {
+                var pos = 7
+                fb.innerHTML += "<div id='day" + i + "' class='day flex'></div>";
+                var d = document.getElementById('day' + i);
+                week[i].forEach((e, n) => {
+                    var cls = makeClass(e, i);
+                    addSp(d, restrict(cls.begin - pos));
+                    cls.uuid = (i * 20) + (n + 1)
+                    addBlock(d, cls);
+                    cls.fill();
+                    pos = cls.begin + cls.len;
+                });
+            }
+        }
+        dispWeek(units);
+        //var distanceWeek = 2;
+        /*var vacations = { "44": true };
+        var exeptions = {
+            negative: {
+                "42": {
+                    "0": { "16.09": "SA/SN" },
+                    "2": { "7.75": "Maths" },
+                    "3": { "15.42": "OMD", "7.75": "DVE" },
+                },
+                "43": {
+                    "3": { "15.42": "OMD" },
+                },
+            },
+            positive: {
+                "43": {
+                    "0": [
+                        { course: "Info", overrideDist: true, type: "CP", start: 19.50, len: 0.75 },
+                    ],
+                },
+            },
+        };*/
+        /*var density = 1;
+        if ((distanceWeek == 1 && week % 2 == 1) || (distanceWeek == 2 && week % 2 == 0)) {
+            density = 0.5;
+        }
+        if (wdg == "long") {
+            if (units == undefined) {
+                //Not gonna happen
+                u = widget.addText("No Time Table")
+                u.centerAlignText();
+            } else if (vacations[week]) {
+                u = widget.addText("Vacations!");
+                u.centerAlignText();
+            } else {
+                base = widget.addStack();
+                base.layoutHorizontally();
+                units.forEach(function (day, i) {
+                    col = base.addStack();
+                    col.layoutVertically();
+                    col.topAlignContent();
+                    col.setPadding(0, 1, 0, 1);
+                    height = 0;
+                    if (exeptions.positive[week] && exeptions.positive[week][i]) {
+                        day.push(...exeptions.positive[week][i]);
+
+                    }
+                    day.forEach(function (course) {
+                        if ((!course.week || (course.week == 1 && week % 2 == 1) || (course.week == 2 && week % 2 == 0)) && !(exeptions.negative[week] && exeptions.negative[week][i] && exeptions.negative[week][i][course.start] == course.course)) {
+                            var localDensity = density;
+                            if (course.overrideDist != undefined) {
+                                localDensity = 1 - Number(!course.overrideDist) * 0.5;
+                            }
+                            if (height < course.start - 7.75) {
+                                sp = col.addSpacer((course.start - height - 7.75) * (135 / 11));
+                            }
+                            stack = col.addStack();
+                            stack.backgroundColor = "#404040";
+                            stack.size = new Size(65, (course.len) * (135 / 11));
+                            stack.cornerRadius = 2;
+                            var bar = stack.addStack();
+                            bar.size = new Size(4, (course.len) * (135 / 11));
+                            bar.backgroundColor = clrs[cnames.indexOf(course.course)];
+                            stack.addSpacer(3);
+                            var u = stack.addText(course.course);
+                            u.font = new Font("Menlo-Bold", 10);
+                            u.textOpacity = localDensity;
+                            stack.addSpacer();
+                            var type = stack.addStack();
+                            type.size = new Size(6, 6);
+                            type.cornerRadius = 1;
+                            switch (course.type) {
+                                default:
+                                    type.backgroundColor = "#FFA010";
+                                    break;
+                                case "CP":
+                                    type.backgroundColor = "#FFFFFF";
+                                    break;
+                                case "CM":
+                                    type.backgroundColor = "#4040FC";
+                            }
+                            height = course.start + course.len - 7.75;
+                        }
+                    });
+                    if (height < 11) {
+                        sp = col.addSpacer((11 - height) * (135 / 11));
+                    }
+                });
+            }
+            Script.setWidget(widget);
+        }*/
+    </script>
+</body>
+
+</html>
